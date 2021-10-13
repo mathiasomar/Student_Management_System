@@ -1,0 +1,11 @@
+{% load static %}
+<ul class="navbar-nav ml-auto">
+
+    <!-- Messages Dropdown Menu -->
+    
+    {% if user.is_authenticated %}
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="/adminLogout" class="nav-link">Logout</a>
+      </li>
+      {% endif %}
+  </ul>

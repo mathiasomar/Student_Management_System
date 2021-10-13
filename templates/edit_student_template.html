@@ -1,0 +1,110 @@
+{% extends 'index.html' %}
+{% block page_title %}
+Edit Student <br>| Name : {{student.first_name}} {{student.middle_name}} {{student.last_name}} |<br>| REGNO : {{student.regno}} |
+{% endblock page_title %}
+{% block main_content %}
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+      
+          <!-- Main content -->
+          <section class="content">
+            <div class="container-fluid">
+              <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                  <!-- general form elements -->
+                  <div class="card card-primary">
+                    <div class="card-header">
+                      <h3 class="card-title">Edit Student</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form action="/edit_student_save" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                      <div class="card-body">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="student_id" placeholder="Reg Number" value="{{student.id}}">
+                        </div>
+                        <div class="form-group">
+                            <label>Registration Number</label>
+                            <input type="text" class="form-control" name="regno" placeholder="Reg Number" value="{{student.regno}}">
+                        </div>
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" class="form-control" name="first_name" placeholder="First Name" value="{{student.first_name}}">
+                        </div>
+                        <div class="form-group">
+                            <label>Middle Name</label>
+                            <input type="text" class="form-control" name="middle_name" placeholder="Middle Name" value="{{student.middle_name}}">
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" class="form-control" name="last_name" placeholder="Last Name" value="{{student.last_name}}">
+                        </div>
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <select name="gender" id="" class="form-control">
+                                <option value="Male" {% if student.gender == "Male" %} selected {% endif %}>Male</option>
+                                <option value="Female" {% if student.gender == "Female" %} selected {% endif %}>Female</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label>Address</label>
+                          <input type="text" class="form-control" name="add" placeholder="Address" value="{{student.address}}">
+                        </div>
+                        <div class="form-group">
+                            <label>Course</label>
+                            <select name="course" id="" class="form-control">
+                                {% for course in courses %}
+                                <option value="{{ course.id }}" {% if course.id == student.course_id.id %} selected {% endif %}>{{ course.course_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Session Start Year</label>
+                            <input type="date" class="form-control" name="start" placeholder="Session Start Year" value="{{student.session_start_year|date:'Y-m-d'}}">
+                        </div>
+                        <div class="form-group">
+                            <label>Session End Year</label>
+                            <input type="date" class="form-control" name="end" placeholder="Session End Year" value="{{student.session_end_year|date:'Y-m-d'}}">
+                        </div>
+                        <div class="form-group">
+                          <label>Profile Pic</label>
+                          <input type="file" class="form-control" name="profile_pic" placeholder="Profile Picture" value="">
+                        </div>
+                      </div>
+                      <!-- /.card-body -->
+      
+                      <div class="card-footer">
+                        <button type="submit" class="btn btn-primary btn-block">Save Student</button>
+                      </div>
+                      {% if messages %}
+                    <div class="col-12">
+                    {% for message in messages %}
+                    <div class="alert alert-success" style="margin-top: 10px; text-align:center;">{{message}}</div>
+                    {% endfor %}
+                    </div>
+                        {% endif %}
+                    </form>
+                  </div>
+      
+                </div>
+                <!--/.col (left) -->
+                <!-- right column -->
+                <div class="col-md-6">
+                  <!-- Form Element sizes -->
+                  <!-- /.card -->
+                </div>
+                <!--/.col (right) -->
+              </div>
+              <!-- /.row -->
+            </div><!-- /.container-fluid -->
+          </section>
+      
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  {% endblock main_content %}

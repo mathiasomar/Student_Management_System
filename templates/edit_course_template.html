@@ -1,0 +1,66 @@
+{% extends 'index.html' %}
+{% block page_title %}
+Edit Course | Name : {{course.course_name}} | #ID : {{course.id}}
+{% endblock page_title %}
+{% block main_content %}
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+      
+          <!-- Main content -->
+          <section class="content">
+            <div class="container-fluid">
+              <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                  <!-- general form elements -->
+                  <div class="card card-primary">
+                    <div class="card-header">
+                      <h3 class="card-title">Edit Course</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form action="/edit_course_save" method="POST">
+                        {% csrf_token %}
+                      <div class="card-body">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="course_id" placeholder="Course Id" value="{{course.id}}">
+                        </div>
+                        <div class="form-group">
+                            <label>Course Name</label>
+                            <input type="text" class="form-control" name="course_name" placeholder="Course Name" value="{{course.course_name}}">
+                        </div>
+                      </div>
+                      <!-- /.card-body -->
+      
+                      <div class="card-footer">
+                        <button type="submit" class="btn btn-primary btn-block">Save Course</button>
+                      </div>
+                      {% if messages %}
+                    <div class="col-12">
+                    {% for message in messages %}
+                    <div class="alert alert-success" style="margin-top: 10px; text-align:center;">{{message}}</div>
+                    {% endfor %}
+                    </div>
+                        {% endif %}
+                    </form>
+                  </div>
+      
+                </div>
+                <!--/.col (left) -->
+                <!-- right column -->
+                <div class="col-md-6">
+                  <!-- Form Element sizes -->
+                  <!-- /.card -->
+                </div>
+                <!--/.col (right) -->
+              </div>
+              <!-- /.row -->
+            </div><!-- /.container-fluid -->
+          </section>
+      
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  {% endblock main_content %}
